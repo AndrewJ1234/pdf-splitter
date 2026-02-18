@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Problem Splitter</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ── Upload screen ── -->
+  <div id="uploadScreen" class="screen upload-screen">
+    <div class="upload-hero">
+      <div class="app-logo">📄</div>
+      <h1>PDF Problem Splitter</h1>
+      <p class="subtitle">Upload a homework PDF — each problem gets its own image and work area in one scrollable
+        document.</p>
+      <div class="upload-box" id="uploadBox">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="17 8 12 3 7 8"></polyline>
+          <line x1="12" y1="3" x2="12" y2="15"></line>
+        </svg>
+        <p>Click to upload or drag &amp; drop</p>
+        <span>PDF or image files supported</span>
+      </div>
+      <input type="file" id="fileInput" accept=".pdf,image/*" hidden>
+
+      <div class="upload-options">
+        <div class="split-method">
+          <span class="opt-label">Split by:</span>
+          <label class="radio-pill">
+            <input type="radio" name="splitMethod" value="auto" checked>
+            <span>Auto (numbered problems)</span>
+          </label>
+          <label class="radio-pill">
+            <input type="radio" name="splitMethod" value="manual">
+            <span>Manual (equal sections)</span>
+          </label>
+        </div>
+        <div id="numProblemsGroup" class="num-group" style="display:none;">
+          <label for="numProblems">Sections:</label>
+          <input type="number" id="numProblems" min="1" max="50" value="5">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Loading screen ── -->
+  <div id="loadingScreen" class="screen loading-screen" style="display:none;">
+    <div class="spinner"></div>
+    <p>Splitting problems…</p>
+  </div>
+
+  <!-- ── Worksheet screen ── -->
+  <div id="worksheetScreen" class="screen worksheet-screen" style="display:none;">
+
+    <!-- Sticky top bar -->
+    <div class="ws-topbar">
+      <button id="backBtn" class="icon-btn" title="Upload new PDF">← Back</button>
+      <span id="wsTitle" class="ws-title"></span>
+      <div class="ws-actions" style="display:flex; gap:8px;">
+        <button id="wsPrint" class="icon-btn accent" title="Export worksheet for Notability/iPad">🖨️ Export
+          PDF</button>
+        <button id="wsDownloadAll" class="icon-btn" title="Download all images">⬇ Images</button>
+        <button id="wsNew" class="icon-btn" title="Start new session">➕ New</button>
+      </div>
+    </div>
+
+    <!-- All problems stacked in one scrollable document -->
+    <div class="worksheet-body" id="worksheetBody"></div>
+
+  </div>
+
+  <!-- Quick Look fullscreen modal -->
+  <div id="quickLookModal" class="ql-modal">
+    <div class="ql-dialog">
+      <div class="ql-header">
+        <span id="qlTitle"></span>
+        <button id="qlClose" class="ql-close">✕</button>
+      </div>
+      <div class="ql-body">
+        <canvas id="qlCanvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="pdf.min.js"></script>
+  <script src="jspdf.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+
+</html>
