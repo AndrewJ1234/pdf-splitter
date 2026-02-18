@@ -1,0 +1,29 @@
+# Package managers
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project specific
+*.pdf
+# But don't ignore the library files we downloaded
+!pdf.min.js
+!pdf.worker.min.js
+!jspdf.min.js
+
+# Build / Temp
+dist/
+build/
+.cache/
+.agent/
